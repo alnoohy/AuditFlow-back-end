@@ -55,7 +55,7 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Component Diagram
 
-![alt text](image-2.png)
+![alt text](image-3.png)
 
 ## Next Steps (Future Enhancements)
 
