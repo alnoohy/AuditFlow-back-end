@@ -9,7 +9,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+  email: { type: String, required: true, unique: true },
+
+role: {
+      type: String,
+      enum: ['admin', 'auditor', 'employee'],
+      default: 'employee',
+    },
+    department: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
 userSchema.set('toJSON', {
   transform: (document, userObj) => {
