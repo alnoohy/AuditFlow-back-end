@@ -13,6 +13,9 @@ const isSignedIn = require('./middleware/isSignedIn');
 
 // Routers
 const authRouter = require('./routes/authRouter');
+const SubmissionsRouter = require('./routes/authRouter');
+const auditRequestsRouter = require('./routes/authRouter');
+const usersRouter = require('./routes/authRouter');
 
 app.use(cors());
 app.use(express.json());
@@ -22,6 +25,8 @@ app.use(logger('dev'));
 
 // PUBLIC
 app.use('/auth', authRouter);
+app.use('/users' , usersRouter);
+
 
 // PROTECTED
 app.use(isSignedIn);
