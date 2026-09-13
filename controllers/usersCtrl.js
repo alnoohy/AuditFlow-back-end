@@ -1,6 +1,31 @@
 const User = require('../models/user');
 
 // GET /users  (admin only — view all users, e.g. for Manage Users page)
+const create = async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ err: 'Only admins can create users.' });
+    }
+
+    const usernameTaken = await User.findOne({ username: req.body.username });
+    if (usernameTaken) {
+      return res.status(409).json({ err: 'Username already in use' });
+    }
+
+    const emailTaken = await User.findOne({ email: req.body.email });
+    if (emailTaken) {
+      return res.status(409).json({ err: 'Email already in use' });
+    }
+
+    const hashedPassword = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
+    req.body.password = hashedPassword;
+
+    const user = await User.create(req.body);
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
 const index = async (req, res) => {
   try {
     if (req.user.role !== 'admin') {
@@ -52,4 +77,4 @@ const deleteUser = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
-module.exports={index,show,update,delete:deleteUser};
+module.exports={create,index,show,update,delete:deleteUser};

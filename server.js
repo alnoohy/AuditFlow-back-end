@@ -25,11 +25,12 @@ app.use(logger('dev'));
 
 // PUBLIC
 app.use('/auth', authRouter);
-app.use('/users' , usersRouter);
-
 
 // PROTECTED
 app.use(isSignedIn);
+
+app.use('/users' , usersRouter);
+
 
 app.get('/protected', (req, res) => {
   try {
