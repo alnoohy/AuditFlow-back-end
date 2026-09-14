@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
+//const submissionSchema = require('./submission');
 
 const auditRequestSchema = new mongoose.Schema(
   {
@@ -14,20 +16,14 @@ const auditRequestSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: [
-        'pending',
-        'under review',
-        'completed',
-        'rejected',
-        'overdue',
-      ],
-      default: 'pending',
+      enum: ["pending", "under review", "completed", "rejected", "overdue"],
+      default: "pending",
     },
 
     priority: {
       type: String,
-      enum: ['low', 'medium', 'high'],
-      default: 'medium',
+      enum: ["low", "medium", "high"],
+      default: "medium",
     },
 
     deadline: {
@@ -37,13 +33,13 @@ const auditRequestSchema = new mongoose.Schema(
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
 
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
 
@@ -51,15 +47,14 @@ const auditRequestSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+    //submissions: [submissionSchema];
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-const AuditRequest = mongoose.model(
-  'AuditRequest',
-  auditRequestSchema
-);
+const AuditRequest = mongoose.model("AuditRequest", auditRequestSchema);
 
 module.exports = AuditRequest;
