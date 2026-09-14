@@ -18,6 +18,8 @@ const authRouter = require('./routes/authRouter');
 const SubmissionsRouter = require('./routes/authRouter');
 const auditRequestsRouter = require('./routes/auditRequestsRouter');
 const usersRouter = require('./routes/usersRouter');
+const departmentsRouter = require('./routes/departmentRouter');
+
 
 app.use(cors());
 app.use(express.json());
@@ -33,6 +35,7 @@ app.use(isSignedIn);
 
 app.use('/users', isAdmin, usersRouter);
 app.use('/audit-requests', auditRequestsRouter);
+app.use('/departments' , departmentsRouter )
 
 app.get('/protected', (req, res) => {
   try {
