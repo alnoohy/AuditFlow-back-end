@@ -30,3 +30,18 @@ const update = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+const deleteDepartment = async (req, res) => {
+  try {
+    await Department.findByIdAndDelete(req.params.departmentId);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+module.exports = {
+  index,
+  create,
+  update,
+  delete: deleteDepartment,
+};
