@@ -17,7 +17,7 @@ role: {
       enum: ['admin', 'auditor', 'employee'],
       default: 'employee',
     },
-    department: { type: String, required: true },
+      department: { type: mongoose.Schema.Types.ObjectId, ref: 'Department', required: true },
   },
   { timestamps: true }
 );
