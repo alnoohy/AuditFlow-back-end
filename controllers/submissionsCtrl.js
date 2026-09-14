@@ -73,8 +73,18 @@ const updateSubmission = async (req, res) => {
         }
       }
     }
-
+    //saving the updated submission
     await auditRequest.save();
+
+    //populate
+    const updatedAuditRequest = await AuditRequest.findById(auditRequest._id)
+      .populate("createdBy", "username email role department")
+      .populate("assignedTo", "username email role department")
+      .populate("submissions.submittedBy", "username email role");
+
+    res.status(200).json(updatedAuditRequest);
+
+    //end of the update submission
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
