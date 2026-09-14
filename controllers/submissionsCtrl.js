@@ -59,6 +59,22 @@ const updateSubmission = async (req, res) => {
       if (req.body.comments) submission.comments = req.body.comments;
       if (req.body.evidenceUrl) submission.evidenceUrl = req.body.evidenceUrl;
     }
+
+    if (req.user.role === "auditor" || req.user.role === "admin") {
+      if (req.body.status) {
+        submission.status = req.body.status;
+        //sync the status
+        if (req.body.status === "approved") {
+          auditRequest.status = "completed";
+        } else if (req.body.status === "rejected") {
+          auditRequest.status = "rejected";
+        } else if (req.body.status === "changes requested") {
+          auditRequest.status = "pending"; // or back to employee
+        }
+      }
+    }
+
+    await auditRequest.save();
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
