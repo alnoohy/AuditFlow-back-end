@@ -35,6 +35,35 @@ const createSubmission = async (req, res) => {
   }
 };
 
+const updateSubmission = async (req, res) => {
+  try {
+    const { requestId, submissionId } = req.params;
+
+    const auditRequest = await AuditRequest.findById(submissionId);
+
+    if (!auditRequest) {
+      return res.status(404).json({ err: "Audit request not found " }); // Not Found error
+    }
+
+    const submission = auditRequest.submissions.id(submissionId);
+    if (!submission) {
+      return res.status(404).json({ err: "Submission not found." }); // Not Found error
+    }
+
+    if (req.user.role === "employee") {
+      if (submission.submittedBy.toString() !== req.user._id.toString()) {
+        return res
+          .status(403)
+          .json({ err: "you can only edit your own submission" }); // Not Authreized error (I think not sure)
+      }
+      if (req.body.comments) submission.comments = req.body.comments;
+      if (req.body.evidenceUrl) submission.evidenceUrl = req.body.evidenceUrl;
+    }
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
 module.exports = {
   createSubmission,
 };
