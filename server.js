@@ -14,7 +14,7 @@ const isSignedIn = require('./middleware/isSignedIn');
 // Routers
 const authRouter = require('./routes/authRouter');
 const SubmissionsRouter = require('./routes/authRouter');
-const auditRequestsRouter = require('./routes/authRouter');
+const auditRequestsRouter = require('./routes/auditRequestsRouter');
 const usersRouter = require('./routes/authRouter');
 
 app.use(cors());
@@ -25,13 +25,12 @@ app.use(logger('dev'));
 
 // PUBLIC
 app.use('/auth', authRouter);
-
 app.use('/users' , usersRouter);
 
 
 // PROTECTED
 app.use(isSignedIn);
-
+app.use('/audit-requests', auditRequestsRouter);
 
 app.get('/protected', (req, res) => {
   try {
