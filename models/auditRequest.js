@@ -1,6 +1,29 @@
 const mongoose = require("mongoose");
 
-//const submissionSchema = require('./submission');
+const submissionSchema = new mongoose.Schema(
+  {
+    comments: {
+      type: String,
+      required: true,
+    },
+
+    evidenceURL: {
+      type: String,
+      required: true,
+    },
+
+    status: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  {
+    timestamp: { createdAt: "submittedAt", updatedAt: false },
+  },
+);
+
+module.exports = submissionSchema;
 
 const auditRequestSchema = new mongoose.Schema(
   {
@@ -48,7 +71,7 @@ const auditRequestSchema = new mongoose.Schema(
       required: true,
     },
 
-    //submissions: [submissionSchema];
+    submissions: [submissionSchema],
   },
   {
     timestamps: true,
