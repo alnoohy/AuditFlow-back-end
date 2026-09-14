@@ -1,6 +1,6 @@
 # AuditFlow
 
-![AuditFlow Logo](./auditflow.png)
+![AuditFlow Logo](./assets/logo%20auditflow%20.png)
 
 AuditFlow is a full-stack MERN application that helps companies manage internal audit requests in one place, replacing scattered emails, spreadsheets, and files. Auditors create and assign audit requests to employees, employees submit evidence or comments in response, and auditors review each submission — approving it, rejecting it, or requesting changes. Admins and managers oversee users, departments, categories, and overall audit progress through a dashboard.
 
@@ -47,15 +47,15 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Front-End Routes
 
-![alt text](image.png)
+![alt text](./assets/image.png)
 
 ## Back-End Routes
 
-![alt text](image-1.png)
+![alt text](./assets/image-1.png)
 
 ## Component Diagram
 
-![alt text](image-3.png)
+![alt text](./assets/image-3.png)
 
 ## Next Steps (Future Enhancements)
 
