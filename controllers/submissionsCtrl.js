@@ -41,6 +41,7 @@ const updateSubmission = async (req, res) => {
 
     const auditRequest = await AuditRequest.findById(submissionId);
 
+    //safty
     if (!auditRequest) {
       return res.status(404).json({ err: "Audit request not found " }); // Not Found error
     }
@@ -90,6 +91,43 @@ const updateSubmission = async (req, res) => {
   }
 };
 
+const deleteSubmission = async (req, res) => {
+  try {
+    const { requestId, submissionId } = req.params;
+    const auditRequest = await AuditRequest.findById(requestId);
+
+    //safty
+    if (!auditRequest) {
+      return res.status(404).json({ err: "Audit request not found." });
+    }
+
+    const submission = auditRequest.submissions.id(submissionId);
+    if (!submission) {
+      return res.status(404).json({ err: "Submission not found." });
+    }
+
+    if (
+      req.user.role === "employee" &&
+      submission.submittedBy.toString() !== req.user._id.toString()
+    ) {
+      return res
+        .status(403)
+        .json({ err: "You can only delete your own submissions." });
+    }
+
+    // Remove the sub-document
+    auditRequest.submissions.pull({ _id: submissionId });
+
+    await auditRequest.save();
+
+    res.status(200).end();
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
 module.exports = {
   createSubmission,
+  updateSubmission,
+  deleteSubmission,
 };
