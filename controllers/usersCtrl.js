@@ -1,11 +1,10 @@
+const bcrypt=require('bcrypt');
 const User = require('../models/user');
+const SALT_ROUNDS=10;
 
 // GET /users  (admin only — view all users, e.g. for Manage Users page)
 const create = async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ err: 'Only admins can create users.' });
-    }
 
     const usernameTaken = await User.findOne({ username: req.body.username });
     if (usernameTaken) {
@@ -28,10 +27,7 @@ const create = async (req, res) => {
 };
 const index = async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ err: 'Only admins can view all users.' });
-    }
-    const users = await User.find();
+    const users = await User.find().populate('department');
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ err: err.message });
@@ -40,10 +36,7 @@ const index = async (req, res) => {
 // GET /users/:userId  (admin only — view a single user's details)
 const show = async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ err: 'Only admins can view user details.' });
-    }
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId).populate('department');
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ err: err.message });
@@ -53,9 +46,6 @@ const show = async (req, res) => {
 // PUT /users/:userId  (admin only — change someone's role or department)
 const update = async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ err: 'Only admins can update users.' });
-    }
     const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {
       new: true,
     });
@@ -68,9 +58,6 @@ const update = async (req, res) => {
 // DELETE /users/:userId  (admin only)
 const deleteUser = async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ err: 'Only admins can delete users.' });
-    }
     await User.findByIdAndDelete(req.params.userId);
     res.status(204).end();
   } catch (err) {
