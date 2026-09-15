@@ -12,16 +12,16 @@ const createSubmission = async (req, res) => {
 
     const newSubmission = {
       comments: req.body.comments,
-      evidenceURL: req.body.evidenceURL,
+      evidenceUrl: req.body.evidenceUrl,
       submittedBy: req.user._id,
       status: "pending review",
     };
 
-    AuditRequest.push(newSubmission);
-    AuditRequest.status = "under Review";
+    auditRequest.submissions.push(newSubmission);
+    auditRequest.status = "under review";
 
     //saving the new submission
-    await AuditRequest.Save();
+    await auditRequest.save();
 
     const updatedAuditRequest = await AuditRequest.findById(auditRequest._id)
       .populate("createdBy", "username email role department")
@@ -36,10 +36,12 @@ const createSubmission = async (req, res) => {
 };
 
 const updateSubmission = async (req, res) => {
+  console.log("PARAMS RECEIVED:", req.params); // <-- Add this line
+
   try {
     const { requestId, submissionId } = req.params;
 
-    const auditRequest = await AuditRequest.findById(submissionId);
+    const auditRequest = await AuditRequest.findById(requestId);
 
     //safty
     if (!auditRequest) {
