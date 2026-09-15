@@ -4,6 +4,9 @@ const isAdmin = require("../middleware/isAdmin");
 const departmentsCtrl = require("../controllers/departmentCtrl");
 const isSignedIn = require("../middleware/isSignedIn");
 
+//Public - needed to signup for the dropdown of the department
+router.get("/", departmentsCtrl.index);
+
 // Admin only
 router.post("/", isSignedIn, isAdmin, departmentsCtrl.create);
 

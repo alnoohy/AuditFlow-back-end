@@ -36,7 +36,7 @@ app.use(isSignedIn);
 app.use("/users", isAdmin, usersRouter);
 app.use("/audit-requests", auditRequestsRouter);
 app.use("/audit-requests/:requestId/submissions", submissionsRouter);
-app.use("/departments", departmentsRouter);
+
 
 app.get("/protected", (req, res) => {
   try {
