@@ -48,7 +48,21 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 ## Front-End Routes
 
 ![alt text](./assets/image.png)
+# AuditFlow - Front-End Routes
 
+| Route | Page / Description |
+| :--- | :--- |
+| `/` | Landing Page |
+| `/sign-up` | Sign Up |
+| `/sign-in` | Sign In |
+| `/dashboard` | Dashboard |
+| `/audit-requests` | Audit Requests |
+| `/audit-requests/new` | Create Request |
+| `/audit-requests/:requestId` | Request Details |
+| `/audit-requests/:requestId/edit` | Edit Request |
+| `/audit-requests/:requestId/submit` | Submit Evidence |
+| `/admin/users` | Manage Users |
+| `/admin/departments` | Manage Departments |
 ## Back-End Routes
 
 ![alt text](./assets/image-1.png)
