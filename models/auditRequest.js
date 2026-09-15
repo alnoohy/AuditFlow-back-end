@@ -7,12 +7,17 @@ const submissionSchema = new mongoose.Schema(
       required: true,
     },
 
-    evidenceURL: {
+    evidenceUrl: {
       type: String,
       required: true,
     },
 
     status: {
+      type: String,
+      enum: ["pending review", "approved", "rejected", "changes requested"],
+      default: "pending review",
+    },
+    submittedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -68,6 +73,7 @@ const auditRequestSchema = new mongoose.Schema(
 
     department: {
       type: String,
+      ref: "Department",
       required: true,
     },
 
