@@ -28,6 +28,7 @@ app.use(logger("dev"));
 
 // PUBLIC
 app.use("/auth", authRouter);
+app.use("/departments", departmentsRouter);
 
 // PROTECTED
 app.use(isSignedIn);
