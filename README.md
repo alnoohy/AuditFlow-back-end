@@ -52,7 +52,46 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 ## Back-End Routes
 
 ![alt text](./assets/image-1.png)
+# AuditFlow - Back-End Routes
 
+## AUTH
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/auth/sign-up` | Register a new user account. |
+| **POST** | `/auth/sign-in` | Authenticate an existing user and return a JWT. |
+
+---
+
+## AUDIT REQUESTS
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/audit-requests` | Retrieve all audit requests (with search, sort, and role-based filters). |
+| **POST** | `/audit-requests` | Create and assign a new audit request (Auditor/Admin only). |
+| **GET** | `/audit-requests/:requestId` | Retrieve details for a single audit request. |
+| **PUT** | `/audit-requests/:requestId` | Update an existing audit request (Auditor/Admin only). |
+| **DELETE** | `/audit-requests/:requestId` | Delete an audit request (Auditor/Admin only). |
+
+---
+
+## SUBMISSIONS
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/audit-requests/:requestId/submissions` | Submit evidence, info, or comments for an audit request (Employee/Auditor). |
+| **PUT** | `/audit-requests/:requestId/submissions/:submissionId` | Update a submission or review/update its status (Approve, Reject, Request Changes). |
+| **DELETE** | `/audit-requests/:requestId/submissions/:submissionId` | Delete a specific submission. |
+
+---
+
+## USERS
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/users` | Retrieve all system users (Admin/Manager only). |
+| **PUT** | `/users/:userId` | Update a user's details, role, or department (Admin only). |
+| **DELETE** | `/users/:userId` | Deactivate or delete a user account (Admin only). |
 ## Component Diagram
 
 ![alt text](./assets/image-3.png)
