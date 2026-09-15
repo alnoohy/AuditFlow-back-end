@@ -15,7 +15,7 @@ const isAdmin = require("./middleware/isAdmin");
 
 // Routers
 const authRouter = require("./routes/authRouter");
-const submissionsRouter = require("./routes/submissionsRouter");
+const submissionsRouter = require("./routes/SubmissionsRouter");
 const auditRequestsRouter = require("./routes/auditRequestsRouter");
 const usersRouter = require("./routes/usersRouter");
 const departmentsRouter = require("./routes/departmentRouter");
