@@ -10,9 +10,13 @@ const createSubmission = async (req, res) => {
       return res.status(404).json({ err: "Audit request not found." });
     }
 
+    if (!req.file) {
+      return res.status(400).json({ err: "Evidence file is required." });
+    }
+
     const newSubmission = {
       comments: req.body.comments,
-      evidenceUrl: req.body.evidenceUrl,
+      evidenceUrl: req.file.path,
       submittedBy: req.user._id,
       status: "pending review",
     };
