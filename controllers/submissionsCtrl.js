@@ -13,10 +13,11 @@ const createSubmission = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ err: "Evidence file is required." });
     }
+    const filePath = req.file.path.replace(/\\/g, "/");
 
     const newSubmission = {
       comments: req.body.comments,
-      evidenceUrl: req.file.path,
+      evidenceUrl: filePath,
       submittedBy: req.user._id,
       status: "pending review",
     };
