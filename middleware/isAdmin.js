@@ -1,11 +1,11 @@
 const isAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({
-        err: 'Admin access required',
-      });
-    }
-  
-    next();
-  };
-  
-  module.exports = isAdmin;
+  if (req.user.role !== "admin" && req.user.role !== "auditor") {
+    return res.status(403).json({
+      err: "Authentication access required",
+    });
+  }
+
+  next();
+};
+
+module.exports = isAdmin;

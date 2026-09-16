@@ -11,7 +11,7 @@ const app = express();
 const cors = require("cors");
 const logger = require("morgan");
 const isSignedIn = require("./middleware/isSignedIn");
-const isAdmin = require("./middleware/isAdmin");
+const isAdminOrAuditor = require("./middleware/isAdmin");
 
 // Routers
 const authRouter = require("./routes/authRouter");
@@ -33,10 +33,9 @@ app.use("/departments", departmentsRouter);
 // PROTECTED
 app.use(isSignedIn);
 
-app.use("/users", isAdmin, usersRouter);
+app.use("/users", isAdminOrAuditor, usersRouter);
 app.use("/audit-requests", auditRequestsRouter);
 app.use("/audit-requests/:requestId/submissions", submissionsRouter);
-
 
 app.get("/protected", (req, res) => {
   try {
