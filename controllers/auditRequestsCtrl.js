@@ -1,26 +1,21 @@
 const AuditRequest = require('../models/auditRequest');
 
-// GET the audit request
 const index = async (req, res) => {
   try {
     const filter = {};
 
-    // Employees only see requests assigned to them
     if (req.user.role === 'employee') {
       filter.assignedTo = req.user._id;
     }
 
-    // Filter by status
     if (req.query.status) {
       filter.status = req.query.status;
     }
 
-    // Filter by priority
     if (req.query.priority) {
       filter.priority = req.query.priority;
     }
 
-    // Filter by department
     if (req.query.department) {
       filter.department = req.query.department;
     }
@@ -33,9 +28,16 @@ const index = async (req, res) => {
       .populate(
         'assignedTo',
         'username email role department'
+      )
+      .populate(
+        'department',
+        'name'
+      )
+      .populate(
+        'submissions.submittedBy',
+        'username email role'
       );
 
-    // Search by title
     if (req.query.search) {
       const searchText = req.query.search.toLowerCase();
 
@@ -54,8 +56,6 @@ const index = async (req, res) => {
   }
 };
 
-
-// POST by audit requests
 const create = async (req, res) => {
   try {
     if (req.user.role !== 'auditor') {
@@ -78,8 +78,6 @@ const create = async (req, res) => {
   }
 };
 
-
-// GET /audit-requests/:requestId
 const show = async (req, res) => {
   try {
     const auditRequest = await AuditRequest.findById(
@@ -92,6 +90,14 @@ const show = async (req, res) => {
       .populate(
         'assignedTo',
         'username email role department'
+      )
+      .populate(
+        'department',
+        'name'
+      )
+      .populate(
+        'submissions.submittedBy',
+        'username email role'
       );
 
     if (!auditRequest) {
@@ -100,7 +106,6 @@ const show = async (req, res) => {
       });
     }
 
-    // Employees can only view requests assigned to them
     if (
       req.user.role === 'employee' &&
       auditRequest.assignedTo._id.toString() !==
@@ -119,8 +124,6 @@ const show = async (req, res) => {
   }
 };
 
-
-// PUT /audit-requests/:requestId
 const update = async (req, res) => {
   try {
     if (req.user.role !== 'auditor') {
@@ -129,7 +132,6 @@ const update = async (req, res) => {
       });
     }
 
-    // Do not allow createdBy to be changed
     delete req.body.createdBy;
 
     const updatedAuditRequest =
@@ -137,7 +139,7 @@ const update = async (req, res) => {
         req.params.requestId,
         req.body,
         {
-          new: true,
+          returnDocument: 'after',
           runValidators: true,
         }
       );
@@ -156,8 +158,6 @@ const update = async (req, res) => {
   }
 };
 
-
-// DELETE /audit-requests/:requestId
 const deleteAuditRequest = async (req, res) => {
   try {
     if (req.user.role !== 'auditor') {
@@ -184,7 +184,6 @@ const deleteAuditRequest = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   index,
