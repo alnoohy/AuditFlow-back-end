@@ -25,7 +25,7 @@ const submissionSchema = new mongoose.Schema(
     },
   },
   {
-    timestamp: { createdAt: "submittedAt", updatedAt: false },
+    timestamps: { createdAt: "submittedAt", updatedAt: false },
   },
 );
 
@@ -136,7 +136,7 @@ const workspaceNoteSchema = new mongoose.Schema(
 const workspaceEvidenceSchema = new mongoose.Schema(
   {
     evidenceId: {
-      type: Number,
+      type: String,
       required: true,
     },
 
@@ -194,7 +194,7 @@ const workspaceSchema = new mongoose.Schema(
     },
 
     selectedEvidenceId: {
-      type: Number,
+      type: String,
       default: null,
     },
 
