@@ -27,7 +27,7 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Getting Started
 
-- **Deployed App:** [PLACEHOLDER_DEPLOYED_APP_LINK](PLACEHOLDER_DEPLOYED_APP_LINK)
+- **Deployed App:** [PLACEHOLDER_DEPLOYED_APP_LINK](https://audit-flow-front-end-lemon.vercel.app/)
 - **Planning Materials:**
   - [Wireframes](https://excalidraw.com/#room=ccd0e8d448d3de0f4ac1,6KtkHPFMsoRzh5NiOaCobg)
 - **Front-End Repository:** [AuditFlow-front-end](https://github.com/alnoohy/AuditFlow-front-end)
