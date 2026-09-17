@@ -27,7 +27,11 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Getting Started
 
+<<<<<<< HEAD
 - **Deployed App:** [Click Here](https://audit-flow-front-end-lemon.vercel.app)
+=======
+- **Deployed App:** [PLACEHOLDER_DEPLOYED_APP_LINK](https://audit-flow-front-end-lemon.vercel.app/)
+>>>>>>> fb2907339f8ba11875c0eaa3955e5db977dcff64
 - **Planning Materials:**
   - [Wireframes](https://excalidraw.com/#room=ccd0e8d448d3de0f4ac1,6KtkHPFMsoRzh5NiOaCobg)
 - **Front-End Repository:** [AuditFlow-front-end](https://github.com/alnoohy/AuditFlow-front-end)
@@ -122,4 +126,8 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Attributions
 
-- PLACEHOLDER_ATTRIBUTION_LINK_OR_NONE
+## Attributions
+
+- [Lucide React](https://lucide.dev/) — icon library
+- [Recharts](https://recharts.org/) — charting library used for dashboard visualizations
+- [Fontsource IBM Plex Sans](https://fontsource.org/fonts/ibm-plex-sans) — font used throughout the app
