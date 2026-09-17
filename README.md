@@ -122,4 +122,8 @@ AuditFlow is a full-stack MERN application that helps companies manage internal 
 
 ## Attributions
 
-- PLACEHOLDER_ATTRIBUTION_LINK_OR_NONE
+## Attributions
+
+- [Lucide React](https://lucide.dev/) — icon library
+- [Recharts](https://recharts.org/) — charting library used for dashboard visualizations
+- [Fontsource IBM Plex Sans](https://fontsource.org/fonts/ibm-plex-sans) — font used throughout the app
